@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-/*ceci est un test*/
-/*j'aime les naines rousses*/
+
 #include <estia-image.h>
 #include <getopt.h>
 
