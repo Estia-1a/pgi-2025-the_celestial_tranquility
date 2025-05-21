@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+/*ceci est un test*/
 
 #include <estia-image.h>
 #include <getopt.h>
