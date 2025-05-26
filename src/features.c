@@ -29,11 +29,4 @@ void dimension (char *source_path){
     if (resultat){
         printf("dimension: %d, %d\n", width, height);
     
-    }
-    else {
-        printf("erreur:");
-    }
 }
-   
-    
-
