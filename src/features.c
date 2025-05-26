@@ -74,3 +74,22 @@ void tenth_pixel (char *source_path){
     
 }
 
+void second_line(char *source_path){
+    int width;
+    int height;
+    int channel_count;
+    unsigned char *data;
+
+    int couleur = read_image_data(source_path, &data, &width, &height, &channel_count);
+    int R=data[width*3*1], G=data[width*3*1+1], B=data[width*3*1+2];
+
+    if (couleur){
+        printf("first_pixel: %d, %d, %d", R, G, B);
+    }
+    else {
+        printf("erreur:");
+    }
+
+
+
+}
