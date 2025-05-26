@@ -37,11 +37,21 @@ void dimension (char *source_path){
    
     
 
-void tenth_pixel (char *source_path){
+void first_pixel (char *source_path){
     int width;
-    int height; 
-    int channel_count; 
+    int height;
+    int channel_count;
+    unsigned char *data;
+
+    int couleur = read_image_data(source_path, &data, &width, &height, &channel_count);
+    int R=data[0], G=data[1], B=data[2];
+
+    if (couleur){
+        printf("first_pixel: %d, %d, %d", R, G, B);
+    }
+    else {
+        printf("erreur:");
+    }
     
-    int read_image_data(const char *filename, unsigned char **data, int *width, int *height, int *channel_count);
 }
 
