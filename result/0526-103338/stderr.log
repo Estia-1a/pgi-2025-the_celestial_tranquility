@@ -1,0 +1,15 @@
+/home/runner/work/pgi-2025-the_celestial_tranquility/pgi-2025-the_celestial_tranquility/src/main.c:48:1: error: expected identifier or ‘(’ before ‘if’
+   48 | if ( strncmp( configuration.command, "dimension", 9 ) == 0 ) {
+      | ^~
+/home/runner/work/pgi-2025-the_celestial_tranquility/pgi-2025-the_celestial_tranquility/src/main.c:54:3: error: expected identifier or ‘(’ before ‘return’
+   54 |   return 0;
+      |   ^~~~~~
+/home/runner/work/pgi-2025-the_celestial_tranquility/pgi-2025-the_celestial_tranquility/src/main.c:55:1: error: expected identifier or ‘(’ before ‘}’ token
+   55 | }
+      | ^
+gmake[2]: *** [CMakeFiles/freud.dir/build.make:107: CMakeFiles/freud.dir/src/main.c.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:87: CMakeFiles/freud.dir/all] Error 2
+gmake: *** [Makefile:136: all] Error 2
+
+The process '/usr/local/bin/cmake' failed with exit code 2
