@@ -89,7 +89,24 @@ void second_line(char *source_path){
     else {
         printf("erreur:");
     }
+}
+    
+    
+    
+void print_pixel(char *source_path, int x, int y ){
 
+    int width;
+    int height;
+    int channel_count;
+    unsigned char *data;
 
+    int couleur = read_image_data(source_path, &data, &width, &height, &channel_count);
+    int R = data[(y * width + x) * 3], G = data[(y * width + x) * 3 + 1], B = data[(y * width + x) * 3 + 2];
 
+    if (couleur){
+        printf("print_pixel: %d, %d, %d", R, G, B);
+    }
+    else {
+        printf("erreur:");
+    }
 }
