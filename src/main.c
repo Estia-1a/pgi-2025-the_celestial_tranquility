@@ -41,6 +41,15 @@ int main(int argc, char **argv) {
     dimension( configuration.filenames[0] );
 }
 
+
   return 0;
 }
 
+if ( strncmp( configuration.command, "dimension", 9 ) == 0 ) {
+    /* dimension() function is defined in feature.h and implemented in feature.c */
+    dimension( configuration.filenames[0] );
+}
+
+
+  return 0;
+}
