@@ -1,5 +1,7 @@
 #include <estia-image.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "features.h"
 #include "utils.h"
@@ -110,3 +112,135 @@ void print_pixel(char *source_path, int x, int y ){
         printf("erreur:");
     }
 }
+
+void max_pixel(char *source_path){
+    unsigned char *data;
+    int x, y;
+    int height,width,channel_count;
+    int status= read_image_data(source_path, &data, &width, &height, &channel_count);
+    int max_rgb_sum =0;
+    int max1 = 0, max2= 0;
+    int rgb_sum, R,G,B;
+ 
+    if (status!=0){
+ 
+            for (y= 0; y< height; y++) {
+                for (x= 0; x < width; x++) {
+                    R = (y*width+x)*channel_count;
+                    G = (y*width+x)*channel_count + 1;
+                    B = (y*width+x)*channel_count + 2;
+ 
+                    rgb_sum = data[R] + data[G] + data[B];
+                    if (rgb_sum > max_rgb_sum) {
+                        max_rgb_sum = rgb_sum;
+                        max1 = x;
+                        max2= y;
+                    }
+                }
+            }
+ 
+            R = (max2*width+max1)*channel_count;
+            G = (max2*width+max1)*channel_count + 1;
+            B = (max2*width+max1)*channel_count + 2;
+ 
+            printf("max_pixel(%d, %d): %d, %d, %d\n", max1, max2, data[R], data[G], data[B]);
+    }
+    else{
+        printf("error");
+    }
+}
+
+
+
+void max_component(char *source_path,char *pixel){
+
+    unsigned char *data;
+
+    int x,y;
+
+    int height,width,channel_count;
+
+    int status= read_image_data(source_path, &data, &width, &height, &channel_count);
+
+    int max_rgb_sum =0;
+
+    int max1 = 0, max2 = 0;
+
+    int rgb_sum,result;
+ 
+    if (status!=0){
+
+            if(strcmp(pixel, "R") == 0){
+
+                 result=0;
+
+            }
+
+            else if(strcmp(pixel, "G") == 0) {
+
+                result=1;
+
+            }
+
+            else if(strcmp(pixel, "B") == 0)  {
+
+                result=2;
+
+            }
+ 
+            for (y= 0; y< height; y++) {
+
+                for (x= 0; x < width; x++) {
+
+                    rgb_sum= (y*width+x)*channel_count + result;
+
+                    if (data[rgb_sum]>max_rgb_sum) {
+
+                        max_rgb_sum = data[rgb_sum];
+
+                        max1=x;
+
+                        max2=y;
+
+                    }
+
+                }
+
+            }
+ 
+ 
+            int R1 = (max2*width+max1)*channel_count;
+
+            int G1 = (max2*width+max1)*channel_count + 1;
+
+            int B1 = (max2*width+max1)*channel_count + 2;
+ 
+            if (strcmp(pixel,"R")==0){
+
+                printf("max_component R (%d, %d): %d \n", max1, max2, data[R1]);
+
+            }
+ 
+             if (strcmp(pixel,"G")==0){
+
+                printf("max_component G (%d, %d): %d \n", max1, max2, data[G1]);
+
+            }
+ 
+             if (strcmp(pixel,"B")==0){
+
+                printf("max_component B (%d, %d): %d \n", max1, max2, data[B1]);
+
+            }
+ 
+    }
+
+    else{
+
+        printf("An error occured");
+
+    }
+
+}   
+
+ 
