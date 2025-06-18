@@ -267,9 +267,38 @@ void color_red(char* source_path){
 
     }
  
-    const char* output_path = "./images/input/red_filtered_output.bmp";
+    const char* output_path = "./images/input/color_red.bmp";
 
     write_image_data(output_path, image_data, img_width, img_height);
 
 }
  
+void color_blue(char* source_path){
+
+    unsigned char* image_data = NULL;
+
+    int img_width = 0, img_height = 0, channels = 0;
+ 
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+ 
+    int pixel_count = img_width * img_height;
+ 
+    for (int p = 0; p < pixel_count; ++p) {
+
+        int offset = p * channels;
+
+        if (channels >= 3) {
+
+            image_data[offset + 0] = 0; // red
+
+            image_data[offset + 1] = 0; // green
+
+        }
+
+    }
+ 
+    const char* output_path = "./images/input/color_blue.bmp";
+
+    write_image_data(output_path, image_data, img_width, img_height);
+
+}

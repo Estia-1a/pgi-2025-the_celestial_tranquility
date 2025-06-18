@@ -81,5 +81,10 @@ if(strncmp( configuration.command, "color_red", 9 ) ==0 ) {
     color_red(configuration.filenames[0]);
 }
 
+if(strncmp( configuration.command, "color_blue", 9 ) ==0 ) {
+    /*color_red()unction is defined in utils.h and implemented in utils.c */
+    color_blue(configuration.filenames[0]);
+}
+
 return 0;
 }
