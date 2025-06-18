@@ -498,9 +498,27 @@ void color_gray_luminance(char* source_path) {
 }
 
 void color_invert(char* source_path) {
+    unsigned char *pixels = NULL;
+    int img_width = 0, img_height = 0, num_channels = 0;
 
+    read_image_data(source_path, &pixels, &img_width, &img_height, &num_channels);
 
+    for (int y = 0; y < img_height; y++) {
+        for (int x = 0; x < img_width; x++) {
+            int offset = num_channels * (x + y * img_width);
 
+            // Inverser chaque composante de couleur (RGB)
+            unsigned char red   = pixels[offset];
+            unsigned char green = pixels[offset + 1];
+            unsigned char blue  = pixels[offset + 2];
+
+            pixels[offset]     = 255 - red;
+            pixels[offset + 1] = 255 - green;
+            pixels[offset + 2] = 255 - blue;
+        }
+    }
+
+    write_image_data("output_inverted.bmp", pixels, img_width, img_height);
 }
 
 void color_desaturate(char* source_path) {
