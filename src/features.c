@@ -521,7 +521,7 @@ void color_invert(char* source_path) {
     write_image_data("output_inverted.bmp", pixels, img_width, img_height);
 }
 
-void color_desaturate(char* source_path) {
+    void color_desaturate(char* source_path) {
 
     unsigned char* image_data = NULL;
     int img_width = 0, img_height = 0, channels = 0;
@@ -552,8 +552,52 @@ void color_desaturate(char* source_path) {
 
 }
 
-void stat_report(char* source_path) {
+void stat_report(char *source_path) {
+    FILE *f = fopen("stat_report.txt", "w");
+    if (!f) return;
 
+    unsigned char *img;
+    int w, h, c;
+    int status = read_image_data((const char *)source_path, &img, &w, &h, &c); {
+        fclose(f);
+        return;
+    }
 
+    int x, y, i, r, g, b, s;
+    int maxs = 0, mins = 256 * 3, xmax = 0, ymax = 0, xmin = 0, ymin = 0;
+    int rmax = 0, gmax = 0, bmax = 0, rmin = 255, gmin = 255, bmin = 255;
+    int rxmax = 0, rymax = 0, gxmax = 0, gymax = 0, bxmax = 0, bymax = 0;
+    int rxmin = 0, rymin = 0, gxmin = 0, gymin = 0, bxmin = 0, bymin = 0;
 
+    for (y = 0; y < h; y++) {
+        for (x = 0; x < w; x++) {
+            i = (y * w + x) * c;
+            r = img[i];
+            g = img[i + 1];
+            b = img[i + 2];
+            s = r + g + b;
+
+            if (s > maxs) { maxs = s; xmax = x; ymax = y; }
+            if (s < mins) { mins = s; xmin = x; ymin = y; }
+
+            if (r > rmax) { rmax = r; rxmax = x; rymax = y; }
+            if (g > gmax) { gmax = g; gxmax = x; gymax = y; }
+            if (b > bmax) { bmax = b; bxmax = x; bymax = y; }
+
+            if (r < rmin) { rmin = r; rxmin = x; rymin = y; }
+            if (g < gmin) { gmin = g; gxmin = x; gymin = y; }
+            if (b < bmin) { bmin = b; bxmin = x; bymin = y; }
+        }
+    }
+
+    fprintf(f, "max_pixel(%d, %d): %d, %d, %d\n\n", xmax, ymax, img[(ymax * w + xmax) * c], img[(ymax * w + xmax) * c + 1], img[(ymax * w + xmax) * c + 2]);
+    fprintf(f, "min_pixel(%d, %d): %d, %d, %d\n\n", xmin, ymin, img[(ymin * w + xmin) * c], img[(ymin * w + xmin) * c + 1], img[(ymin * w + xmin) * c + 2]);
+    fprintf(f, "max_component R (%d, %d): %d\n\n", rxmax, rymax, rmax);
+    fprintf(f, "max_component G (%d, %d): %d\n\n", gxmax, gymax, gmax);
+    fprintf(f, "max_component B (%d, %d): %d\n\n", bxmax, bymax, bmax);
+    fprintf(f, "min_component R (%d, %d): %d\n\n", rxmin, rymin, rmin);
+    fprintf(f, "min_component G (%d, %d): %d\n\n", gxmin, gymin, gmin);
+    fprintf(f, "min_component B (%d, %d): %d\n\n", bxmin, bymin, bmin);
+
+    fclose(f);
 }
