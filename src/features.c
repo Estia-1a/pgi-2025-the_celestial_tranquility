@@ -558,7 +558,8 @@ void stat_report(char *source_path) {
 
     unsigned char *img;
     int w, h, c;
-    int status = read_image_data((const char *)source_path, &img, &w, &h, &c); {
+    int status = read_image_data((const char *)source_path, &img, &w, &h, &c); 
+    if (!status) {
         fclose(f);
         return;
     }
@@ -601,14 +602,14 @@ void stat_report(char *source_path) {
 
     fclose(f);
 }
-
-void rotat_cw(char *source_path) {
+/*
+void rotate_cw(char *source_path) {
 
 
 
 }
 
-void rotat_acw(char *source_path) {
+void rotate_acw(char *source_path) {
 
 
     
@@ -631,3 +632,4 @@ void mirror_total(char *source_path) {
 
     
 }
+*/
