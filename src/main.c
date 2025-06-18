@@ -74,7 +74,12 @@ if ( strncmp( configuration.command, "max_pixel",11 ) == 0 ) {
 if( strncmp( configuration.command, "max_component", 11 ) == 0 ) {
     /*max_component() function is defined in utils.h and implemented in utils.c */
     max_component(configuration.filenames[0],configuration.arguments[0]);
-  }
+}
+
+if(strncmp( configuration.command, "color_red", 9 ) ==0 ) {
+    /*color_red()unction is defined in utils.h and implemented in utils.c */
+    color_red(configuration.filenames[0]);
+}
 
 return 0;
 }

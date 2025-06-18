@@ -243,4 +243,33 @@ void max_component(char *source_path,char *pixel){
 
 }   
 
+void color_red(char* source_path){
+
+    unsigned char* image_data = NULL;
+
+    int img_width = 0, img_height = 0, channels = 0;
+ 
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+ 
+    int pixel_count = img_width * img_height;
+ 
+    for (int p = 0; p < pixel_count; ++p) {
+
+        int offset = p * channels;
+
+        if (channels >= 3) {
+
+            image_data[offset + 1] = 0; // green
+
+            image_data[offset + 2] = 0; // blue
+
+        }
+
+    }
+ 
+    const char* output_path = "./images/input/red_filtered_output.bmp";
+
+    write_image_data(output_path, image_data, img_width, img_height);
+
+}
  
