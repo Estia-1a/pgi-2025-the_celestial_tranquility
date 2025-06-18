@@ -637,7 +637,7 @@ void mirror_horizontal(char *source_path) {
 }
 
 
-/*void mirror_vertical(char *source_path) {
+void mirror_vertical(char *source_path) {
     unsigned char *contenu;
     int lx, ly, nb;
     read_image_data(source_path, &contenu, &lx, &ly, &nb);
@@ -663,4 +663,4 @@ void mirror_total(char *source_path) {
 
 
     
-}*/
+}
