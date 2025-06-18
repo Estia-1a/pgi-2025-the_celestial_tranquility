@@ -601,3 +601,33 @@ void stat_report(char *source_path) {
 
     fclose(f);
 }
+
+void rotat_cw(char *source_path) {
+
+
+
+}
+
+void rotat_acw(char *source_path) {
+
+
+    
+}
+
+void mirror_horizontal(char *source_path) {
+
+
+    
+}
+
+void mirror_vertical(char *source_path) {
+
+
+    
+}
+
+void mirror_total(char *source_path) {
+
+
+    
+}
