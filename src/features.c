@@ -496,3 +496,21 @@ void color_gray_luminance(char* source_path) {
     const char* output_path = "image_out.bmp";
     write_image_data(output_path, image_data, img_width, img_height);
 }
+
+void color_invert(char* source_path) {
+
+
+
+}
+
+void color_desaturate(char* source_path) {
+
+
+
+}
+
+void stat_report(char* source_path) {
+
+
+
+}
