@@ -86,7 +86,7 @@ void second_line(char *source_path){
     int R=data[width*3*1], G=data[width*3*1+1], B=data[width*3*1+2];
 
     if (couleur){
-        printf("first_pixel: %d, %d, %d", R, G, B);
+        printf("second_line: %d, %d, %d", R, G, B);
     }
     else {
         printf("erreur:");
