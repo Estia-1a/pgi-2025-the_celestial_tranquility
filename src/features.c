@@ -68,7 +68,7 @@ void tenth_pixel (char *source_path){
     int R=data[27], G=data[28], B=data[29];
 
     if (couleur){
-        printf("Tenth Pixel : %d,%d,%d",R,G,B);
+        printf("tenth_pixel: %d, %d, %d",R,G,B);
     }
     else {
         printf("erreur:");
