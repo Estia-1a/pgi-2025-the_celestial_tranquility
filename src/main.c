@@ -76,5 +76,16 @@ if( strncmp( configuration.command, "max_component", 11 ) == 0 ) {
     max_component(configuration.filenames[0],configuration.arguments[0]);
   }
 
-return 0;
+if( strncmp( configuration.command, "min_component", 11 ) == 0 ) {
+    /*print_pixel() function is defined in utils.h and implemented in utils.c */
+    min_component(configuration.filenames[0],configuration.arguments[0]);
+  }
+
+
+  if ( strncmp( configuration.command, "min_pixel",11 ) == 0 ) {
+  /*int x = atoi(configuration.arguments[0]);
+  int y = atoi(configuration.arguments[1]);*/
+  /* second_line() function is defined in feature.h and implemented in feature.c */
+    min_pixel(configuration.filenames[0]);
+  }
 }

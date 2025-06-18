@@ -106,7 +106,7 @@ void print_pixel(char *source_path, int x, int y ){
     int R = data[(y * width + x) * 3], G = data[(y * width + x) * 3 + 1], B = data[(y * width + x) * 3 + 2];
 
     if (couleur){
-        printf("print_pixel: %d, %d, %d", R, G, B);
+        printf("print_pixel(x,y): %d, %d, %d", R, G, B);
     }
     else {
         printf("erreur:");
@@ -243,4 +243,109 @@ void max_component(char *source_path,char *pixel){
 
 }   
 
+
+void min_component(char *source_path,char *pixel){
+
+    unsigned char *data;
+
+    int x,y;
+
+    int height,width,channel_count;
+
+    int status= read_image_data(source_path, &data, &width, &height, &channel_count);
+
+    int min_rgb_sum =256;
+
+    int min1 = 0, min2 = 0;
+
+    int rgb_sum,result;
  
+    if (status!=0){
+
+            if(strcmp(pixel, "R") == 0){
+
+                 result=0;
+
+            }
+
+            else if(strcmp(pixel, "G") == 0) {
+
+                result=1;
+
+            }
+
+            else if(strcmp(pixel, "B") == 0)  {
+
+                result=2;
+
+            }
+ 
+            for (y= 0; y< height; y++) {
+
+                for (x= 0; x < width; x++) {
+
+                    rgb_sum= (y*width+x)*channel_count + result;
+
+                    if (data[rgb_sum]<min_rgb_sum) {
+
+                        min_rgb_sum = data[rgb_sum];
+
+                        min1=x;
+
+                        min2=y;
+
+                    }
+
+                }
+
+            }
+
+            printf("min_component %s (%d, %d): %d\n",pixel, min1, min2,min_rgb_sum);
+
+    }
+
+    else{
+
+        printf("error");
+
+    }
+
+}
+
+ 
+ void min_pixel(char *source_path){
+    unsigned char *data;
+    int x, y;
+    int height,width,channel_count;
+    int status= read_image_data(source_path, &data, &width, &height, &channel_count);
+    int min_rgb_sum =256*3;
+    int min1 = 0, min2= 0;
+    int rgb_sum, R,G,B;
+ 
+    if (status!=0){
+ 
+            for (y= 0; y< height; y++) {
+                for (x= 0; x < width; x++) {
+                    R = (y*width+x)*channel_count;
+                    G = (y*width+x)*channel_count + 1;
+                    B = (y*width+x)*channel_count + 2;
+ 
+                    rgb_sum = data[R] + data[G] + data[B];
+                    if (rgb_sum < min_rgb_sum) {
+                        min_rgb_sum = rgb_sum;
+                        min1 = x;
+                        min2= y;
+                    }
+                }
+            }
+ 
+            R = (min2*width+min1)*channel_count;
+            G = (min2*width+min1)*channel_count + 1;
+            B = (min2*width+min1)*channel_count + 2;
+ 
+            printf("min_pixel(%d, %d): %d, %d, %d\n", min1, min2, data[R], data[G], data[B]);
+    }
+    else{
+        printf("error");
+    }
+}
