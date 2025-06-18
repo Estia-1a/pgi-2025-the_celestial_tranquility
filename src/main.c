@@ -114,7 +114,7 @@ if( strncmp( configuration.command, "min_component", 11 ) == 0 ) {
     min_pixel(configuration.filenames[0]);
   }
 
-  if ( strncmp( configuration.command, "color_invert",11 ) == 0 ) {
+  if ( strncmp( configuration.command, "color_invert",13 ) == 0 ) {
   /*int x = atoi(configuration.arguments[0]);
   int y = atoi(configuration.arguments[1]);*/
   /* second_line() function is defined in feature.h and implemented in feature.c */
