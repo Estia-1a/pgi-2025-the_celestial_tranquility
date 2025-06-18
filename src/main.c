@@ -74,7 +74,32 @@ if ( strncmp( configuration.command, "max_pixel",11 ) == 0 ) {
 if( strncmp( configuration.command, "max_component", 11 ) == 0 ) {
     /*max_component() function is defined in utils.h and implemented in utils.c */
     max_component(configuration.filenames[0],configuration.arguments[0]);
-  }
+}
+
+if(strncmp( configuration.command, "color_red", 9 ) ==0 ) {
+    /*color_red()unction is defined in utils.h and implemented in utils.c */
+    color_red(configuration.filenames[0]);
+}
+
+if(strncmp( configuration.command, "color_blue", 9 ) ==0 ) {
+    /*color_blue()unction is defined in utils.h and implemented in utils.c */
+    color_blue(configuration.filenames[0]);
+}
+
+if(strncmp( configuration.command, "color_green", 9 ) ==0 ) {
+    /*color_green()unction is defined in utils.h and implemented in utils.c */
+    color_green(configuration.filenames[0]);
+}
+
+if(strncmp( configuration.command, "color_gray", 9 ) ==0 ) {
+    /*color_gray()unction is defined in utils.h and implemented in utils.c */
+    color_gray(configuration.filenames[0]);
+}
+
+if(strncmp( configuration.command, "color_gray_luminance", 9 ) ==0 ) {
+    /*color_gray()unction is defined in utils.h and implemented in utils.c */
+    color_gray_luminance(configuration.filenames[0]);
+}
 
 if( strncmp( configuration.command, "min_component", 11 ) == 0 ) {
     /*print_pixel() function is defined in utils.h and implemented in utils.c */

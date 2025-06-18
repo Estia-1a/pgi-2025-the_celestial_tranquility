@@ -68,7 +68,7 @@ void tenth_pixel (char *source_path){
     int R=data[27], G=data[28], B=data[29];
 
     if (couleur){
-        printf("first_pixel: %d, %d, %d", R, G, B);
+        printf("tenth_pixel: %d, %d, %d",R,G,B);
     }
     else {
         printf("erreur:");
@@ -86,7 +86,7 @@ void second_line(char *source_path){
     int R=data[width*3*1], G=data[width*3*1+1], B=data[width*3*1+2];
 
     if (couleur){
-        printf("first_pixel: %d, %d, %d", R, G, B);
+        printf("second_line: %d, %d, %d", R, G, B);
     }
     else {
         printf("erreur:");
@@ -106,7 +106,7 @@ void print_pixel(char *source_path, int x, int y ){
     int R = data[(y * width + x) * 3], G = data[(y * width + x) * 3 + 1], B = data[(y * width + x) * 3 + 2];
 
     if (couleur){
-        printf("print_pixel(x,y): %d, %d, %d", R, G, B);
+        printf("print_pixel (%d, %d): %d, %d, %d", x, y, R, G, B);
     }
     else {
         printf("erreur:");
@@ -348,4 +348,151 @@ void min_component(char *source_path,char *pixel){
     else{
         printf("error");
     }
+ }
+void color_red(char* source_path){
+
+    unsigned char* image_data = NULL;
+
+    int img_width = 0, img_height = 0, channels = 0;
+ 
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+ 
+    int pixel_count = img_width * img_height;
+ 
+    for (int p = 0; p < pixel_count; ++p) {
+
+        int offset = p * channels;
+
+        if (channels >= 3) {
+
+            image_data[offset + 1] = 0; // green
+
+            image_data[offset + 2] = 0; // blue
+
+        }
+
+    }
+ 
+    const char* output_path = "image_out.bmp";
+
+    write_image_data(output_path, image_data, img_width, img_height);
+
+}
+ 
+void color_blue(char* source_path){
+
+    unsigned char* image_data = NULL;
+
+    int img_width = 0, img_height = 0, channels = 0;
+ 
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+ 
+    int pixel_count = img_width * img_height;
+ 
+    for (int p = 0; p < pixel_count; ++p) {
+
+        int offset = p * channels;
+
+        if (channels >= 3) {
+
+            image_data[offset + 0] = 0; // red
+
+            image_data[offset + 1] = 0; // green
+
+        }
+
+    }
+ 
+    const char* output_path = "image_out.bmp";
+
+    write_image_data(output_path, image_data, img_width, img_height);
+
+}
+
+void color_green(char* source_path){
+
+    unsigned char* image_data = NULL;
+
+    int img_width = 0, img_height = 0, channels = 0;
+ 
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+ 
+    int pixel_count = img_width * img_height;
+ 
+    for (int p = 0; p < pixel_count; ++p) {
+
+        int offset = p * channels;
+
+        if (channels >= 3) {
+
+            image_data[offset + 0] = 0; // red
+
+            image_data[offset + 2] = 0; // blue
+
+        }
+
+    }
+ 
+    const char* output_path = "image_out.bmp";
+
+    write_image_data(output_path, image_data, img_width, img_height);
+
+}
+
+void color_gray(char* source_path) {
+
+    unsigned char* image_data = NULL;
+    int img_width = 0, img_height = 0, channels = 0;
+
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+
+    int pixel_count = img_width * img_height;
+
+    for (int p = 0; p < pixel_count; ++p) {
+        int offset = p * channels;
+
+        if (channels >= 3) {
+            unsigned char R = image_data[offset + 0];
+            unsigned char G = image_data[offset + 1];
+            unsigned char B = image_data[offset + 2];
+
+            unsigned char value = (R + G + B) / 3;
+
+            image_data[offset + 0] = value; // red
+            image_data[offset + 1] = value; // green
+            image_data[offset + 2] = value; // blue
+        }
+    }
+
+    const char* output_path = "image_out.bmp";
+    write_image_data(output_path, image_data, img_width, img_height);
+}
+
+void color_gray_luminance(char* source_path) {
+
+    unsigned char* image_data = NULL;
+    int img_width = 0, img_height = 0, channels = 0;
+
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
+
+    int pixel_count = img_width * img_height;
+
+    for (int p = 0; p < pixel_count; ++p) {
+        int offset = p * channels;
+
+        if (channels >= 3) {
+            unsigned char R = image_data[offset + 0];
+            unsigned char G = image_data[offset + 1];
+            unsigned char B = image_data[offset + 2];
+
+            unsigned char value = (R*0.21 + G*0.72 + B*0.07);
+
+            image_data[offset + 0] = value; // red
+            image_data[offset + 1] = value; // green
+            image_data[offset + 2] = value; // blue
+        }
+    }
+
+    const char* output_path = "image_out.bmp";
+    write_image_data(output_path, image_data, img_width, img_height);
 }
