@@ -602,7 +602,7 @@ void stat_report(char *source_path) {
 
     fclose(f);
 }
-/*
+
 void rotate_cw(char *source_path) {
 
 
@@ -616,20 +616,51 @@ void rotate_acw(char *source_path) {
 }
 
 void mirror_horizontal(char *source_path) {
+    unsigned char *contenu;
+    int lx, ly, nb;
+    read_image_data(source_path, &contenu, &lx, &ly, &nb);
+
+    for (int j = 0; j < ly; j++) {
+        for (int i = 0; i < lx / 2; i++) {
+            int d1 = (j * lx + i) * nb;
+            int d2 = (j * lx + (lx - i - 1)) * nb;
+
+            for (int k = 0; k < 3; k++) {
+                unsigned char temp = contenu[d1 + k];
+                contenu[d1 + k] = contenu[d2 + k];
+                contenu[d2 + k] = temp;
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", contenu, lx, ly);
+}
+
+
+/*void mirror_vertical(char *source_path) {
+    unsigned char *contenu;
+    int lx, ly, nb;
+    read_image_data(source_path, &contenu, &lx, &ly, &nb);
+
+    for (int j = 0; j < ly / 2; j++) {
+        for (int i = 0; i < lx; i++) {
+            int a = (j * lx + i) * nb;
+            int b = ((ly - 1 - j) * lx + i) * nb;
+            for (int k = 0; k < 3; k++) {
+                unsigned char tmp = contenu[a + k];
+                contenu[a + k] = contenu[b + k];
+                contenu[b + k] = tmp;
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", contenu, lx, ly);
+}
 
 
     
-}
-
-void mirror_vertical(char *source_path) {
-
-
-    
-}
-
 void mirror_total(char *source_path) {
 
 
     
-}
-*/
+}*/
