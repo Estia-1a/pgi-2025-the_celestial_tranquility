@@ -106,7 +106,7 @@ void print_pixel(char *source_path, int x, int y ){
     int R = data[(y * width + x) * 3], G = data[(y * width + x) * 3 + 1], B = data[(y * width + x) * 3 + 2];
 
     if (couleur){
-        printf("print_pixel: %d, %d, %d", R, G, B);
+        printf("print_pixel (%d, %d): %d, %d, %d", x, y, R, G, B);
     }
     else {
         printf("erreur:");
