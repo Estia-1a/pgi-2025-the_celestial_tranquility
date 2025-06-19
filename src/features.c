@@ -518,7 +518,7 @@ void color_invert(char* source_path) {
         }
     }
 
-    write_image_data("output_inverted.bmp", pixels, img_width, img_height);
+    write_image_data("image_out.bmp", pixels, img_width, img_height);
 }
 
     void color_desaturate(char* source_path) {
