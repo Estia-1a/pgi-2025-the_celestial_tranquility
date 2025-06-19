@@ -498,27 +498,28 @@ void color_gray_luminance(char* source_path) {
 }
 
 void color_invert(char* source_path) {
-    unsigned char *pixels = NULL;
-    int img_width = 0, img_height = 0, num_channels = 0;
+    unsigned char *image_data = NULL;
+    int img_width = 0, img_height = 0, channels = 0;
 
-    read_image_data(source_path, &pixels, &img_width, &img_height, &num_channels);
+    read_image_data(source_path, &image_data, &img_width, &img_height, &channels);
 
     for (int y = 0; y < img_height; y++) {
         for (int x = 0; x < img_width; x++) {
-            int offset = num_channels * (x + y * img_width);
+            int offset = channels * (x + y * img_width);
 
             // Inverser chaque composante de couleur (RGB)
-            unsigned char red   = pixels[offset];
-            unsigned char green = pixels[offset + 1];
-            unsigned char blue  = pixels[offset + 2];
+            unsigned char red   = image_data[offset];
+            unsigned char green = image_data[offset + 1];
+            unsigned char blue  = image_data[offset + 2];
 
-            pixels[offset]     = 255 - red;
-            pixels[offset + 1] = 255 - green;
-            pixels[offset + 2] = 255 - blue;
+            image_data[offset]     = 255 - red;
+            image_data[offset + 1] = 255 - green;
+            image_data[offset + 2] = 255 - blue;
         }
     }
 
-    write_image_data("output_inverted.bmp", pixels, img_width, img_height);
+    const char* output_path = "image_out.bmp";
+    write_image_data(output_path, image_data, img_width, img_height);
 }
 
     void color_desaturate(char* source_path) {
@@ -603,7 +604,7 @@ void stat_report(char *source_path) {
     fclose(f);
 }
 
-void rotate_cw(char *source_path) {
+/*void rotate_cw(char *source_path) {
 
 
 
@@ -613,7 +614,7 @@ void rotate_acw(char *source_path) {
 
 
     
-}
+}*/
 
 void mirror_horizontal(char *source_path) {
     unsigned char *contenu;
@@ -689,4 +690,31 @@ void mirror_total(char *source_path) {
         }
     }
     write_image_data("image_out.bmp", contenu, lx, ly);
+}
+
+void scale_crop(char *source_path) {
+    unsigned char *data;
+    int iw, ih, c, cx, cy, tw, th;
+    read_image_data(source_path, &data, &iw, &ih, &c);
+
+    int x0 = cx - tw / 2;
+    int y0 = cy - th / 2;
+
+    if (x0 < 0) x0 = 0;
+    if (y0 < 0) y0 = 0;
+    if (x0 + tw > iw) x0 = iw - tw;
+    if (y0 + th > ih) y0 = ih - th;
+    if (x0 < 0) x0 = 0;
+    if (y0 < 0) y0 = 0;
+
+    for (int j = 0; j < th; j++) {
+        for (int i = 0; i < tw; i++) {
+            int src = ((y0 + j) * iw + (x0 + i)) * c;
+            data[(j * tw + i) * c + 0] = data[src + 0];
+            data[(j * tw + i) * c + 1] = data[src + 1];
+            data[(j * tw + i) * c + 2] = data[src + 2];
+        }
+    }
+
+    write_image_data("image_out.bmp", data, tw, th);
 }
