@@ -716,3 +716,28 @@ void rotate_cw(char *source_path){
     write_image_data("image_out.bmp", datadest, height, width);
     free(datadest);
 }
+
+void rotate_acw(char *source_path){
+    unsigned char* datasrc;
+    unsigned char* datadest;
+    int width, height, channel_count;
+    int x, y;
+    int indexsrc, indexdest, new_x, new_y;
+    read_image_data(source_path, &datasrc, &width, &height, &channel_count);
+    int size = width * height * 3;
+    datadest = malloc(size);
+    for (y=0;y<height;y++) {
+        for (x=0;x<width;x++){
+            indexsrc=y*width*3+3*x;
+            new_x=y;
+            new_y=width-1-x;
+            indexdest=new_y*height*3+3*new_x;
+            datadest[indexdest]=datasrc[indexsrc];
+            datadest[indexdest+1]=datasrc[indexsrc+1];
+            datadest[indexdest+2]=datasrc[indexsrc+2];
+        }
+    }
+   
+    write_image_data("image_out.bmp", datadest, height, width);
+    free(datadest);
+}
