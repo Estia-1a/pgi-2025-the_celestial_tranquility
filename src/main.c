@@ -165,6 +165,13 @@ if ( strncmp( configuration.command, "scale_crop",13 ) == 0 ) {
     mirror_total(configuration.filenames[0]);
   }
 
+  if ( strncmp( configuration.command, "rotate_cw",10 ) == 0 ) {
+  /*int x = atoi(configuration.arguments[0]);
+  int y = atoi(configuration.arguments[1]);*/
+  /* second_line() function is defined in feature.h and implemented in feature.c */
+    rotate_cw(configuration.filenames[0]);
+  }
+
 
 
 
